@@ -2,137 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ironworks & Quotation Management System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <heade>
-            <h1>IS-CON Fabrication Portal</h1>
-            <span>Quotation & Inventory System</span>
-        </heade>
+<div class="container">
+    <header>
+        <h1>IS-CON Fabrication Portal</h1>
+        <span>Quotation & Inventory System</span>
+    </header>
 
-        <div id="messageBox"></div>
-        <div class="grid">
-            <!-- Client Form -->
-            <div class="card">
-                <h2>Register Client</h2>
-                <form id="clientForm">
-                    <label for="clientName">Client Name</label>
-                    <input type="text" id="clientName" placeholder="e.g. Ismael Canseno" required>
-                    <label for="contactNumber">Contact Number</label>
-                    <input type="text" id="contactNumber" placeholder="e.g. 9661776310" required>
-                    <label for="address">Address</label>
-                    <input type="text" id="address" placeholder="e.g. #2179 P. Dandan St., Pasay City, Brgy. 51, Zone 08, 1300" required>
-                    <button type="submit">Save Client</button>
-                </form>
-            </div>
+    <div id="messageBox"></div>
 
-            <!-- Material Inventory Form -->
-            <div class="card">
-                <h2>Add Raw Material</h2>
-                <form id="materialForm">
-                    <label for="materialName">Material Name</label>
-                    <input type="text" id="materialName" placeholder="e.g. Square Tube 2x2" required>
-                    <label for="unitCost">Unit Cost (P)</label>
-                    <input type="number" id="unitCost" step="0.01" placeholder="350.00" required>
-                    <button type="submit" class="steel-btn">Add Material</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Quotation Generation Card -->
-        <div class="card" style="margin-bottom: 25px;">
-            <h2>Generate New Quotation</h2>
-            <form id="quotationForm">
-                <div class="grid" style="margin-bottom: 0;">
-                    <div>
-                        <label for="quoteClientSelect">Select Client</label>
-                        <select id="quoteClientSelect" required>
-                            <option value="">Choose Client...</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="projectTitle">Project Title</label>
-                        <input type="text" id="projectTitle" placeholder="e.g. Fire Exit Gate Grill" required>
-                    </div>
-                </div>
-                <label for="laborCost">Estimated Labor Cost (P)</label>
-                <input type="number" id="laborCost" step="0.01" value="0.00" required>
-                <button type="submit" class="gold-btn">Create Quotation Record</button>
+    <div class="grid">
+        <!-- Client Form -->
+        <div class="card">
+            <h2>Register Client</h2>
+            <form id="clientForm">
+                <label for="clientName">Client Name</label>
+                <input type="text" id="clientName" placeholder="e.g. Juanito Santos" required>
+                <label for="contactNumber">Contact Number</label>
+                <input type="text" id="contactNumber" placeholder="09123456789">
+                <label for="address">Address</label>
+                <input type="text" id="address" placeholder="Pasay City">
+                <button type="submit">Save Client</button>
             </form>
         </div>
 
-        <!-- Quotation Table -->
+        <!-- Material Inventory Form -->
         <div class="card">
-            <h2>Active Projecct Quotation</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Client</th>
-                        <th>Project Title</th>
-                        <th>Labor Cost</th>
-                        <th>Total Amount</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="quotationTableBody">
-                    <!-- Populated via JS -->
-                </tbody>
-            </table>
+            <h2>Add Raw Material</h2>
+            <form id="materialForm">
+                <label for="materialName">Material Name</label>
+                <input type="text" id="materialName" placeholder="e.g. Square Tube 2x2" required>
+                <label for="unitCost">Unit Cost (₱)</label>
+                <input type="number" id="unitCost" step="0.01" placeholder="350.00" required>
+                <button type="submit" class="steel-btn">Add Material</button>
+            </form>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Quotation Generation Card -->
+    <div class="card" style="margin-bottom: 24px;">
+        <h2>Generate New Quotation</h2>
+        <form id="quotationForm">
+            <div class="grid" style="margin-bottom: 0;">
+                <div>
+                    <label for="quoteClientSelect">Select Client</label>
+                    <select id="quoteClientSelect" required>
+                        <option value="">Choose Client...</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="projectTitle">Project Title</label>
+                    <input type="text" id="projectTitle" placeholder="e.g. Fire Exit Gate Grill" required>
+                </div>
+            </div>
+            <label for="laborCost">Estimated Labor Cost (₱)</label>
+            <input type="number" id="laborCost" step="0.01" value="0.00" required>
+            <button type="submit" class="gold-btn">Create Quotation Record</button>
+        </form>
+    </div>
+
+    <!-- Quotations Table -->
+    <div class="card">
+        <h2>Active Project Quotations</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client</th>
+                <th>Project Title</th>
+                <th>Labor Cost</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="quotationTableBody">
+            <!-- Populated via JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

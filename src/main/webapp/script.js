@@ -1,33 +1,33 @@
 const CLIENT_URL = '/api/clients';
-const MATERIALS_URL = '/api/materials';
+const MATERIAL_URL = '/api/materials';
 const QUOTE_URL = '/api/quotations';
 
 function showMessage(text, isError = false) {
     const box = document.getElementById('messageBox');
-    box.textContet = text;
+    box.textContent = text;
     box.className = isError ? 'error' : 'success';
     box.style.display = 'block';
-    setTimeout(() => { box.stlye.display = 'none';}, 4000);
+    setTimeout(() => { box.style.display = 'none'; }, 4000);
 }
 
 async function loadData() {
     try {
-        // Load Clients for Dropdwon
+        // Load Clients for Dropdown
         const clientRes = await fetch(CLIENT_URL);
         const clients = await clientRes.json();
         const select = document.getElementById('quoteClientSelect');
-        slect.innerHTML = '<option value="">Choose Client...</option>';
+        select.innerHTML = '<option value="">Choose Client...</option>';
         clients.forEach(c => {
             const opt = document.createElement('option');
             opt.value = c.id;
-            opt.textContent = `${c.cientName} (${c.contactNumber || 'No #'})`;
+            opt.textContent = `${c.clientName} (${c.contactNumber || 'No #'})`;
             select.appendChild(opt);
         });
 
         // Load Quotations Table
         const quoteRes = await fetch(QUOTE_URL);
         const quotes = await quoteRes.json();
-        const tbody = document.getElementById('quotationTasbleBody');
+        const tbody = document.getElementById('quotationTableBody');
         tbody.innerHTML = '';
         quotes.forEach(q => {
             const row = document.createElement('tr');
@@ -61,7 +61,7 @@ document.getElementById('clientForm').addEventListener('submit', async (e) => {
 
     if (res.ok) {
         showMessage('Client saved successfully!');
-        document.getElementByID('clientForm').reset();
+        document.getElementById('clientForm').reset();
         loadData();
     } else {
         showMessage('Failed to save client.', true);
@@ -72,12 +72,12 @@ document.getElementById('clientForm').addEventListener('submit', async (e) => {
 document.getElementById('materialForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const materialName = document.getElementById('materialName').value;
-    const unitCost= Number(document.getElementById('unitCost').value);
+    const unitCost = Number(document.getElementById('unitCost').value);
 
     const res = await fetch(MATERIAL_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ materialName, unitCost})
+        body: JSON.stringify({ materialName, unitCost })
     });
 
     if (res.ok) {
@@ -96,14 +96,14 @@ document.getElementById('quotationForm').addEventListener('submit', async (e) =>
     const laborCost = Number(document.getElementById('laborCost').value);
 
     const res = await fetch(QUOTE_URL, {
-        methos: 'POST',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clientId, projectTitle, laborCost})
+        body: JSON.stringify({ clientId, projectTitle, laborCost })
     });
 
     if (res.ok) {
         showMessage('Quotation generated successfully!');
-        doucment.getElementById('quotationForm').reset();
+        document.getElementById('quotationForm').reset();
         loadData();
     } else {
         showMessage('Failed to generate quotation.', true);
@@ -111,64 +111,3 @@ document.getElementById('quotationForm').addEventListener('submit', async (e) =>
 });
 
 loadData();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

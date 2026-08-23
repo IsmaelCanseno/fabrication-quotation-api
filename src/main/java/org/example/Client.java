@@ -19,27 +19,3 @@ public class Client {
     public String getAddress() { return address; }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

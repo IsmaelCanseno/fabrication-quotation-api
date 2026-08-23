@@ -77,18 +77,10 @@ public class ClientServlet extends HttpServlet {
         String payload = buffer.toString();
 
         try {
-            String clientName = payload.split("\"clientName\"\\s*:\\s*\"")[1].split("\"")[0];
-
-            // Optional fields using safe extraction checks
-            String contactNumber = "";
-            if (payload.contains("\"contactNumber\"")) {
-                contactNumber = payload.split("\"contactNumber\"\\s*:\\s*\"")[1].split("\"")[0];
-            }
-
-            String address = "";
-            if (payload.contains("\"address\"")) {
-                address = payload.split("\"address\"\\s*:\\s*\"")[1].split("\"")[0];
-            }
+            // Bulletproof extraction using regex/indexOf
+            String clientName = extractJsonValue(payload, "clientName");
+            String contactNumber = extractJsonValue(payload, "contactNumber");
+            String address = extractJsonValue(payload, "address");
 
             String sql = "INSERT INTO clients (client_name, contact_number, address) VALUES (?, ?, ?);";
             try (Connection conn = DatabaseConnection.getConnection();
@@ -105,6 +97,17 @@ public class ClientServlet extends HttpServlet {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().println("{\"error\": \"Invalid request payload.\"}");
+        }
+    }
+
+    // Helper method for safe JSON parsing without strict order requirements
+    private String extractJsonValue(String json, String key) {
+        try {
+            if (!json.contains(key)) return "";
+            String sub = json.split("\"" + key + "\"\\s*:\\s*\"")[1];
+            return sub.split("\"")[0];
+        } catch (Exception e) {
+            return "";
         }
     }
 }
