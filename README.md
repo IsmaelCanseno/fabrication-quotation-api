@@ -1,4 +1,4 @@
-Fabrication & Quotation Management System
+**FABRICATION & QUOTATION MANAGEMENT SYSTEM**
 
 A full-stack, enterprise-style web application designed to streamline administrative workflows, track raw material inventory, manage client directories, and automate project quotations for a fabrication and ironworks business.
 
