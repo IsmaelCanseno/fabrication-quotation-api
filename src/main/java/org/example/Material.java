@@ -3,9 +3,9 @@ package org.example;
 import java.math.BigDecimal;
 
 public class Material {
-    private int id;
-    private String materialName;
-    private BigDecimal unitCost;
+    private final int id;
+    private final String materialName;
+    private final BigDecimal unitCost; // 👈 This fixes the unaccessed/local variable warnings
 
     public Material(int id, String materialName, BigDecimal unitCost) {
         this.id = id;
@@ -13,7 +13,7 @@ public class Material {
         this.unitCost = unitCost;
     }
 
-    public  int getId() {
+    public int getId() {
         return id;
     }
 
@@ -21,31 +21,7 @@ public class Material {
         return materialName;
     }
 
-    public String getUnitCost() {
-        return getUnitCost();
+    public BigDecimal getUnitCost() {
+        return unitCost;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
