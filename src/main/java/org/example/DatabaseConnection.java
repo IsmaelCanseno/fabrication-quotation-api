@@ -8,7 +8,7 @@ public class DatabaseConnection {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/fab_db"; // Make sure this matches your DB name
     private static final String USER = "postgres";
-    private static final String PASSWORD = "YOUR_POSTGRES_PASSWORD"; // Put your actual password here
+    private static final String PASSWORD = "ismael"; // Put your actual password here
 
     static {
         try {

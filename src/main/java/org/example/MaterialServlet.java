@@ -76,14 +76,19 @@ public class MaterialServlet extends HttpServlet {
         String payload = buffer.toString();
 
         try {
+            // Extract materialName (which is wrapped in quotes)
             String materialName = "";
             if (payload.contains("materialName")) {
                 materialName = payload.split("\"materialName\"\\s*:\\s*\"")[1].split("\"")[0];
             }
 
+            // Extract unitCost (which is a raw number without quotes, e.g., 350.00)
             String sanitizedCost = "0";
             if (payload.contains("unitCost")) {
-                sanitizedCost = payload.split("\"unitCost\"\\s*[:]")[1].replaceAll("[^0-9.]", "");
+                String[] parts = payload.split("\"unitCost\"\\s*:\\s*");
+                if (parts.length > 1) {
+                    sanitizedCost = parts[1].replaceAll("[^0-9.]", "");
+                }
             }
             if (sanitizedCost.isEmpty()) sanitizedCost = "0";
             BigDecimal unitCost = new BigDecimal(sanitizedCost);
@@ -99,7 +104,7 @@ public class MaterialServlet extends HttpServlet {
                 response.getWriter().println("{\"status\": \"Material added successfully!\"}");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Check your IntelliJ console for this stack trace if it fails!
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().println("{\"error\": \"Invalid request payload.\"}");
         }
